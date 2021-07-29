@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+before_action :authenticate_user!,except: [:top]
 
 before_action :move_to_signed_in
 
@@ -8,7 +9,7 @@ before_action :move_to_signed_in
     @book.user_id = current_user.id
     if @book.save
       flash[:success] =  "You have created book successfully"
-      redirect_to books_path
+      redirect_to book_path(@book)
     else
       @books = Book.all
       @user = current_user

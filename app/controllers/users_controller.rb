@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+before_action :authenticate_user!,except: [:top]
+
 before_action :move_to_signed_in
 
   def show
